@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            *
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #8e61ff;
+    transition: 0.5s;
+}
+body.active
+{
+    background: #f0f;
+}
+.container {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    margin: 20px;
+}
+.blueBG
+{
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 420px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 45px rgba(0,0,0,0.15);
+}
+.blueBG .box
+{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.blueBG .box h2
+{
+    color: #fff;
+    font-size: 1.2 em;
+    font-weight: 500;
+    margin-bottom: 10px;
+
+}
+.blueBG .box button
+{
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #fff;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+}
+.formBx
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff; 
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 45px rgba(0,0,0,0.25);
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+}
+.formBx.active
+{
+    left: 50%;
+}
+.formBx .form
+{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 50px;
+    transition: 0.5s;
+}
+.formBx .signinForm
+{
+    transition-delay: 0.25s;
+}
+.formBx.active .signinForm
+{
+    left: -100%;
+    transition-delay: 0.25s;
+}
+.formBx .signupForm
+{
+    left: 100%;
+    transition-delay: 0s;
+}
+.formBx.active .signupForm
+{
+    left: 0;
+    transition-delay: 0.25s;
+}
+.formBx .form form
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.formBx .form form h3
+{
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.formBx .form form input
+{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+}
+.formBx .form form input[type = "submit"]
+{
+    background: #ea1515;
+    border: none;
+    color: #fff;
+    max-width: 100px;
+    cursor: pointer;
+}
+.formBx .form form .forgot
+{
+    color: yellowgreen;
+}
+.formBx.active .signupForm input[type = "submit"]
+{
+    background: #f0f;
+}
+@media (max-width: 991px)
+{
+    .container
+    {
+        max-width: 400px;
+        height: 650px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container .blueBG
+    {
+        top: 0;
+        height: 100%;
+    }
+    .formBx
+    {
+        width: 100%;
+        height: 500px;
+        top: 0;
+        box-shadow: none;
+    }
+    .blueBG .box
+    {
+        position: absolute;
+        width: 100%;
+        height: 150px;
+        bottom: 0;
+    }
+    .box.signin
+    {
+        top: 0;
+    }
+    .formBx.active
+    {
+        left: 0;
+        top: 150px;
+    }
+}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="blueBG">
+                <div class="box signin">
+                    <h2>Already have an account?</h2>
+                    <button class="signinBtn">
+                        Sign in
+                    </button>
+                </div>
+                <div class="box signup">
+                    <h2>Don't have an account?</h2>
+                    <button class="signupBtn">
+                        Sign up
+                    </button>
+                </div>
+            </div>
+            <div class="formBx">
+                <div class="form signinForm">
+                        <h3>
+                            Sign In
+                        </h3>
+                        <input id="input_si_username" type="text" placeholder="Username">
+                        <input id="input_si_password" type="password" placeholder="Password">
+                        <input class="w3-button w3-large" type="submit" onclick="signin()" value="Login">
+                        <a href="#" class="forgot">Forgot password</a>
+                </div>
+                <div class="form signupForm">
+                        <h3>
+                            Sign Up
+                        </h3>
+                        <input id="input_su_username" class="w3-input w3-border w3-round" type="text" placeholder="Username">
+                        <input id="input_su_email" class="w3-input w3-border w3-round" type="text" placeholder="Email">
+                        <input id="input_su_password1" class="w3-input w3-border w3-round" type="password" placeholder="Password">
+                        <input id="input_su_password2" class="w3-input w3-border w3-round" type="password" placeholder="Confirm Password">
+                        <input class="w3-button w3-large" type="submit" onclick="call()" value="Register">
+                </div>
+            </div>
+        </div>
+        <script>
+            const signinBtn = document.querySelector('.signinBtn');
+            const signupBtn = document.querySelector('.signupBtn');
+            const formBx = document.querySelector('.formBx');
+            const body = document.querySelector('body');
+            signupBtn.onclick = function()
+            {
+                formBx.classList.add('active');
+                body.classList.add('active');
+            }
+            signinBtn.onclick = function()
+            {
+                formBx.classList.remove('active');
+                body.classList.remove('active');
+            }
+            function call()
+            {
+                var username = document.getElementById("input_su_username").value;
+                var email = document.getElementById("input_su_email").value;
+                var password1 = document.getElementById("input_su_password1").value;
+                var password2 = document.getElementById("input_su_password2").value;
+                if(password1 == password2)
+                {
+                    if(username != "" && email != "")
+                    {
+                        const data = { username: username, email: email, password: password2};
+                        fetch('http://localhost:3000/user/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                        })
+                        .then(function(response){
+                            return response.text().then(function(text){
+                                console.log(text);
+                                console.log(response.status);
+                                if(response.status == 200)
+                                {
+                                    window.location.href = "http://localhost:3000/dashboard";
+                                }
+                            })
+                        })
+                    }
+                }
+            }
+            function signin()
+            {
+                var username = document.getElementById("input_si_username").value;
+                var password = document.getElementById("input_si_password").value;
+                if(username != "" && password != "")
+                {
+                    fetch("http://localhost:3000/user/", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "username": username,
+                            "password": password
+                        },
+                        }).then(function(response) {  
+
+                        }, function(error) {
+                            error.message 
+                        })
+                }
+            }
+            
+        </script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </body>
+</html>
